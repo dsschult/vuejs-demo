@@ -1,3 +1,8 @@
+//
+// Routing Demo
+//
+
+
 Home = {
   template: `
 <article class="home">
