@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Demo 1</title>
+<link rel="stylesheet" href="/static/boilerplate.css?v=7.3.0">
+<style>
+#page-container {
+    margin: 1em;
+}
+.item {
+    background: #cfc;
+    margin: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+}
+#show {
+    margin: 1em;
+}
+.container {
+    border: 1px solid blue;
+}
+#show button {
+    margin-bottom: .5em;
+}
+</style>
+</head>
+<body>
+<div id="page-container">
+    <h2>{{ title }}</h2>
+    
+    <div v-for="item in list" class="item">{{ item }}</div>
+    
+    <p>dynamic link name <input v-model.trim="comics"> : <a href="https://xkcd.com">{{ comics }}</a></p>
+    
+    <div id="show">
+        <button v-on:click="show = !show"><span v-if="show">Hide</span><span v-else>Show</span> container</button>
+        <container v-if="show"></container>
+    </div>
+    
+    <div id="container2">
+        <container></container>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="/static/boilerplate.js"></script>
+<script>
+Vue.component('container', {
+    data: function(){
+        return {
+            count: 0
+        }
+    },
+    template: "<div class='container'><p>container component<p><button v-on:click='count++'>You clicked me {{ count }} times.</button></div>"
+})
+
+var app = new Vue({
+    el: '#page-container',
+    data: {
+        title: 'Demo-1 home page',
+        list: ["a", "b", "c"],
+        comics: 'comics',
+        show: true
+    }
+})
+</script>
+</body>
+</html>
